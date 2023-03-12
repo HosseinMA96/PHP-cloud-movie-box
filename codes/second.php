@@ -43,22 +43,16 @@ $idx=0;
 
 if ($lang!="Select"  && $lang!=null && $result->num_rows > 0) {
 
-//   echo "inside <br>";
-  // output data of each row
+
   while($row = $result->fetch_assoc()) {
     
 
-
-    //  echo "inside loop <br>";
-    //  echo $row["film"] ." midd ".$_GET["film_name"]."<br>";
 
     if ($row["film"] != $_GET["film_name"])
     {
         continue;
     }
    
-    // echo "author ". $authors[$idx]." comment: ". $comments[$idx]."<br>";
-
     $com=$comments[$idx];
     
 
@@ -89,19 +83,8 @@ if ($lang!="Select"  && $lang!=null && $result->num_rows > 0) {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_POST, 1);
 
-    //curl_setopt($ch, CURLOPT_POSTFIELDS, "{\"text\": [\"well hopefully I eventually could find a solution for speech recognition successfully\"], \"model_id\":\"en-es\"}");
-    // $after="], \"model_id\":\"en-es\"}";
 
-    // $temp="<br>abcd"." \"  ";
-    // echo $temp."<br>";
-
-    // curl_setopt($ch, CURLOPT_POSTFIELDS, "{\"text\": [\""   .$com." \"], \"model_id\":\"en-fr\"}");
     curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
-
-    // $temp= "{\"text\": [\"well hopefully I eventually could find a solution for speech recognition successfully\"], \"model_id\":\"en-de\"}";
-  
-    
-
     curl_setopt($ch, CURLOPT_USERPWD, 'apikey' . ':' . 'PFkbvgxFBsq2uoM7VHdF54M5Rvo2HDvVl6N31504HOIb');
  
     $headers = array();
@@ -110,12 +93,8 @@ if ($lang!="Select"  && $lang!=null && $result->num_rows > 0) {
      
     $res = curl_exec($ch);
 
-    // echo $result."<br>";
-
     $res= json_decode($res);
 
-    // echo gettype($result) . "<br>";
-    
     $translation=$res->translations[0]->translation. "<br>";
     }
 
@@ -134,11 +113,6 @@ if ($lang!="Select"  && $lang!=null && $result->num_rows > 0) {
   }
 
 } 
-// else {
-//   echo "0 results";
-// }
-
- 
 
 ?>
 
